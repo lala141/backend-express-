@@ -1,31 +1,31 @@
 const express = require('express');
-const app = express()
+const app = express();
+const logger = require("./logger.js");
 //specify the format will be json
-app.use(express.json())
-const port = 3000
+const port = 3000;
 
+app.use(logger);
+app.use(express.json());
+app.use(express.static('public'));
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
+  res.send('Hello World!');
+});
+app.use(one, two, three, hellomiddleware);
 //making our first request
-app.get("/name",(req,res)=>{
-  //header value
-  console.log("header value:",req.headers.myheader)
-  //getting params
-  console.log("params value:",req.query.myparams)
-  //response
-  res.status(201).json({
-    "message":"Shrayo Maharjan"
-  })
-})
-
-//endpoint post to get body value
-app.post("/data",(req,res)=>{
-  console.log(req.body)
-
+app.get("/hello",(req,res)=>{
+  console.log("header value.,",req.headers.myheader)
+  //getting paramss
+  console.log("parmas value.,",req.query.mparams)
   res.status(200).json({
-    "message":"successfully posted",
+    "message":"hello"
+  })
+});
+//endpoint post to get the body
+app.post("/data", (req, res) => {
+  console.log(req.body);
+
+  res.status(201).json({
+    message: "data received",
   })
 })
 
