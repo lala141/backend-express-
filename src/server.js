@@ -1,34 +1,92 @@
 const express = require('express');
-const app = express();
-const logger = require("./logger.js");
-//specify the format will be json
-const port = 3000;
 
-app.use(logger);
-app.use(express.json());
-app.use(express.static('public'));
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-app.use(one, two, three, hellomiddleware);
-//making our first request
-app.get("/hello",(req,res)=>{
-  console.log("header value.,",req.headers.myheader)
-  //getting paramss
-  console.log("parmas value.,",req.query.mparams)
-  res.status(200).json({
-    "message":"hello"
-  })
-});
-//endpoint post to get the body
-app.post("/data", (req, res) => {
-  console.log(req.body);
+const app = express()
+//4vm32NrAwgbCw5Pb
 
-  res.status(201).json({
-    message: "data received",
-  })
-})
+//specify the format will be in json 
+app.use(express.json())
+//image displaying
+app.use(express.static('public'))
+const port = 3000
+
+//connect the mongo db databse
+const mongoose=require('mongoose')
+require('dotenv').config()
+
+//connection 
+const connectDB = async()=>{
+    try{
+        const conn=await mongoose.connect(process.env.MONGO_URI);
+        console.log("mongo db database connected successfully")
+}
+    catch(error){
+        console.error("error while connecting",error)
+        process.exit(1);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+connectDB().then(()=>{
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+})
 })
